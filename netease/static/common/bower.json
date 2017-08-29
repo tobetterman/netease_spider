@@ -1,0 +1,22 @@
+{
+  "name": "netease",
+  "authors": [
+    "tobetterman <275208498@qq.com>"
+  ],
+  "description": "imitate netease",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "masonry": "^4.2.0",
+    "imagesloaded": "^4.1.3"
+  }
+}

@@ -1,0 +1,21 @@
+*.pyc
+.*.swp
+*.swo
+*.swm
+*.swn
+*.rej
+*.patch
+
+#hide Git Config
+.gitconfig
+.DS_Store
+.idea
+._*
+
+/static
+bower_components/
+*.dat
+*.tmp
+
+local_settings.py
+/var

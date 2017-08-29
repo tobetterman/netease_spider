@@ -1,0 +1,170 @@
+{% extends 'netease/base.html' %}
+
+{% load staticfiles %}
+
+{% block header_resource %}
+    <style type="text/css">
+    * {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    a, a:hover {
+        text-decoration: none
+    }
+    a {
+        color: #333
+    }
+    a:hover {
+        color: #b4a078
+    }
+    a, a:active, a:hover {
+        outline: 0
+    }
+    ul,li {
+        list-style: none;
+    }
+    .thumbnail-list li {
+        margin-bottom: 10px;
+    }
+    .detail-body {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    .good-info {
+        font-size: 16px;
+    }
+    .good-info > div{
+        margin-bottom: 15px;
+    }
+    .good-name {
+        font-size: 180%;
+        line-height: 1;
+    }
+    .price-text {
+        font-size: 150%;
+        color: #d7282d;
+        font-weight: 700;
+    }
+    .detail-body p {
+        margin: 0;
+    }
+    div.comment {
+        margin: 20px;
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+    }
+    div.sku span.sku-item{
+        color: #999;
+        font-size: 12px;
+    }
+    div.picture-list ul li{
+        width: 200px;
+        border: 1px solid #ccc;
+        margin: 0px 5px;
+        padding: 3px;
+    }
+    .attr-list li{
+        font-size: 14px;
+        border-bottom: 1px solid #ccc;
+        padding: 5px 0;
+    }
+    .attr-list li span{
+        margin: 0 5px;
+        padding: 0 5px;
+        display: inline-block;
+    }
+    .attr-list {
+        padding: 0px;
+    }
+    .attr-list .name {
+        width: 120px;
+    }
+    </style>
+{% endblock %}
+{% block main_content %}
+    <div class="container">
+        <div class="detail">
+            <ol class="breadcrumb">
+                    <li><a href="#">{{ goods.category.name }}</a></li>
+                    <li><a href="#">{{ goods.sec_category.name }}</a></li>
+                    <li class="active">{{ goods.name }}</li>
+            </ol>
+            <div class="detail-head row">
+                <div class="col-md-6 view">
+                    <div class="row">
+                        <div class="img-view col-md-10">
+                            <img width="100%" src="{{ goods.cover.all.first.image.url }}">
+                        </div>
+                        <ul class="thumbnail-list col-md-2">
+                            {% for photo in goods.cover.all %}
+                                <li ><img class="img-thumbnail" width="100%" src="{{ photo.image.url }}"></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 good-info">
+                    <div class="good-name">{{ goods.name }}</div>
+                    <div class="good-desc">{{ goods.brief }}</div>
+                    <div class="good-price">售价: <span class="price-text">{{ goods.price }}</span></div>
+                </div>
+            </div>
+            <div class="detail-body">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#detail" data-toggle="tab">
+                             商品详情
+                        </a>
+                    </li>
+                    <li><a href="#comment" data-toggle="tab">评论</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="detail">
+                        <ul class="attr-list">
+                            {% for attr in goods.attr_list %}
+                                <li class="item">
+                                    <span class="name">{{ attr.attrName }}</span>
+                                    <span class="value">{{ attr.attrValue }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {{ goods.detail_html | safe}}
+                    </div>
+                    <div class="tab-pane fade" id="comment">
+                        {% for comment in goods.comments.all %}
+                            <div class="row comment">
+                                <div class="col-md-2">
+                                    <div class="row">
+                                        <img width="50%" class="img-circle" src="{{ comment.avator_url }}">
+                                    </div>
+                                    <div class="row">
+                                        <p>{{comment.user_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="sku">
+                                       {% for sku in comment.sku_dict %}
+                                           <span class="sku-item">{{ sku }}</span>
+                                       {% endfor %}
+                                    </div>
+                                    <div class="content">
+                                       <p>{{ comment.content }}</p><span class="help-block small">{{ comment.comment_time | date:"Y-m-d h:i:s"}}</span>
+                                    </div>
+                                    <div class="picture-list">
+                                        <ul>
+                                            {% for photo in comment.photos.all %}
+                                            <li><img width="100%" height="100%" src="{{ photo.image.url }}"></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">回顶部</a></p>
+    </footer></div>
+{% endblock %}

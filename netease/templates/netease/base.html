@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="严选服装城模块"/>
+    <meta name="keywords" content="严选, 服装城"/>
+
+    <title>严选服装城</title>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'common/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'netease/css/carousel.css' %}">
+      <style>
+        a, a:hover {
+            text-decoration: none
+        }
+        a {
+            color: #333
+        }
+        a:hover {
+            color: #b4a078
+        }
+        a, a:active, a:hover {
+            outline: 0
+        }
+      </style>
+      {% block header_resource %}{% endblock %}
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">严选服装城</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                  {% for i_cate in category %}
+                      {% if i_cate.parent %}
+                        <li><a href="{% url 'category_view' i_cate.parent i_cate.id %}">{{ i_cate.name }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    {% block main_content %}{% endblock %}
+
+    <script type="text/javascript" src="{% static 'common/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/bower_components/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/bower_components/masonry/dist/masonry.pkgd.min.js' %}"></script>
+    <script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+    {% block footer_resource %}{% endblock %}
+
+  </body>
+</html>

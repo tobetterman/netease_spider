@@ -1,0 +1,86 @@
+{% extends 'netease/base.html' %}
+
+{% load staticfiles %}
+{% block main_content %}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+          {% for banner in banners %}
+              {% if forloop.first %}
+                  <li data-target="#myCarousel" data-slide-to="{{ index }}" class="active"></li>
+              {% else %}
+                  <li data-target="#myCarousel" data-slide-to="{{ index }}"></li>
+              {% endif %}
+          {% endfor %}
+      </ol>
+      <div class="carousel-inner" role="listbox">
+          {% for banner in banners %}
+              {% if forloop.first %}
+                  <a class="item next left">
+                    <img class="first-slide" src="{{ banner.image.url }}">
+                  </a>
+              {% elif forloop.last %}
+                  <a class="item active left">
+                    <img class="third-slide" src="{{ banner.image.url }}">
+                  </a>
+              {% else %}
+                  <a class="item">
+                    <img class="second-slide" src="{{ banner.image.url }}">
+                  </a>
+              {% endif %}
+          {% endfor %}
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <div class="container">
+        <div class="row masonry">
+        {% for good in goods %}
+            <div class="col-xs-12 col-sm-3 col-md-3 item">
+                <a title="{{ good.name }}" href="{% url 'detail_view' good.id %}" target="_blank">
+                    <h4>{{ good.name }}</h4>
+                    <div>{{ good.price }} ¥</div>
+                    <div>{{ good.brief }}</div>
+                    <div class="thumbnail">
+                        <img height="265" width="265" src={{ good.list_cover.image.url}}>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+      <!-- /END THE FEATURETTES -->
+  <div class="row col-md-12">
+    <div class="text-center">
+        <ul class="pagination pagination-sm">
+            {% if goods.has_previous %}
+                <a href="?page={{ goods.previous_page_number }}">上一页</a>
+            {% endif %}
+
+            <span class="current">
+                当前是 {{ goods.number }} - {{ goods.paginator.num_pages }}
+            </span>
+
+            {% if goods.has_next %}
+                <a href="?page={{ goods.next_page_number }}">下一页</a>
+            {% endif %}
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_resource %}
+    <script>
+        $('.masonry').imagesLoaded(function() {
+            $('.masonry').masonry({
+                itemSelector: '.item'
+            });
+        });
+    </script>
+{% endblock %}
+

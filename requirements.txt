@@ -1,0 +1,17 @@
+Django==1.8.2
+Fabric==1.8.3
+Markdown==2.3.1
+MySQL-python==1.2.5
+Pillow==2.3.0
+celery==3.1.12
+django-celery==3.1.10
+django-Redis==4.8.0
+djangorestframework==2.3.13
+ipython==2.1.0
+kombu==3.0.37
+pycrypto==2.6.1
+requests==2.1.0
+eventlet==0.15.2
+gevent==1.2.2
+scrapy==1.4
+scrapy-redis==0.6.8

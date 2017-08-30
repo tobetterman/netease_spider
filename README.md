@@ -1,10 +1,10 @@
 # 网易严选模仿
 
-####网站端使用Django + MySQL + Celery + Redis
+#### 网站端使用Django + MySQL + Celery + Redis
 提供首页商品列表功能、商品详情页面和分类页面, 实现简单的页面展示功能
 
 
-####爬虫端使用Scrapy  每日定时从严选的某个频道爬取商品信息
+#### 爬虫端使用Scrapy  每日定时从严选的某个频道爬取商品信息
 - 用redis-scrapy做分布式爬虫
 - 使用user agent池，轮流选择之一来作为user agent
 - 禁止cookies
@@ -12,7 +12,7 @@
 - 每次爬取网站数据, 都会对返回内容求hash值,代表本次获得内容,
 下次更新时如果哈希值相同则不再更新数据库
 
-####目录结构
+#### 目录结构
 - netease_spider 项目主配置
 - netease banner models
 - goods 商品、分类等相关
